@@ -23,11 +23,11 @@ void _fork(char *curr, char *arr[], char **env)
 		int status;
 
 		waitpid(child_pid, &status, 0);
-		_strcpy(arr[0], "/bin/");
+		_strcpy(arr[0], "");
 	}
 	else
 	{
 		_execve(curr, arr, env);
-		_strcpy(arr[0], "/bin/");
+		_strcpy(arr[0], "");
 	}
 }

@@ -9,8 +9,11 @@
 #include <sys/wait.h>
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARGS 64
+void handle_interactive(int argc, char *argv[], char **env);
+void handle_noninteractive(int argc, char *argv[], char **env);
 int _fileno(FILE *stream);
 size_t _getline(char **buffer, size_t *n, FILE *stream);
+size_t _read(char **buffer, size_t *n);
 int prompt(char *outputtxt, char **buffer, size_t *n);
 char *_strtok(char *buffer, char *delimiter);
 void _strtoarr(char *arr[], char *buffer, int num);
