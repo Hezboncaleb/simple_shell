@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[], char **env)
 {
-	char *txt = "$ ", *lineptr = NULL;
+	char *txt = "#cisfun$ ", *lineptr = NULL;
 	char new[MAX_INPUT_LENGTH] = "/bin/";
 	char *curr = argv[0];
 	size_t n = MAX_INPUT_LENGTH;
