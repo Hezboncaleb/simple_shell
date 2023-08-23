@@ -28,7 +28,7 @@ int main(int argc, char *argv[], char **env)
 		}
 		argc = 0;
 		_strtoarr(argv, lineptr, argc);
-		if (handle_exceptional_inputs(curr, env, argv, lineptr) == 1)
+		if (handle_exceptional_inputs(curr, argv, lineptr) == 1)
 		{
 			continue;
 		}

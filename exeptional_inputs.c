@@ -3,18 +3,17 @@
 /**
  * handle_exceptional_inputs - handles inputs
  * @curr: current executable
- * @envp: double pointer to the environment variables
  * @arr: tokenized array
  * @lineptr: original input pointer
  * Return: 1 if it is executed, otherwise 0
  */
 
-int handle_exceptional_inputs(char *curr, char **envp,
+int handle_exceptional_inputs(char *curr,
 		char *arr[], char *lineptr)
 {
 	if (_strcmp(arr[0], "env") == 0)
 	{
-		handle_env(envp);
+		handle_env();
 		return (1);
 	}
 	else if (_strcmp(arr[0], "exit") == 0)

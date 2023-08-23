@@ -14,7 +14,7 @@ size_t _getline(char **buffer, size_t *n, FILE *stream);
 int prompt(char *outputtxt, char **buffer, size_t *n);
 char *_strtok(char *buffer, char *delimiter);
 void _strtoarr(char *arr[], char *buffer, int num);
-void handle_env(char **envp);
+void handle_env(void);
 void handle_exit(char *arr[], char *lineptr);
 void handle_cd(char *curr, char *arr[]);
 int _strlen(char *s);
@@ -27,6 +27,6 @@ void _fork(char *curr, char *arr[], char **env);
 int _strcmp(char *s1, char *s2);
 int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
-int handle_exceptional_inputs(char *curr, char **envp, char *arr[],
+int handle_exceptional_inputs(char *curr, char *arr[],
 		char *lineptr);
 #endif
