@@ -10,7 +10,7 @@
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARGS 64
 void handle_interactive(int argc, char *argv[], char **env);
-void handle_noninteractive(int argc, char *argv[], char **env);
+void handle_query(char *argv[], char **env, char *curr);
 int _fileno(FILE *stream);
 size_t _getline(char **buffer, size_t *n, FILE *stream);
 size_t _read(char **buffer, size_t *n);
