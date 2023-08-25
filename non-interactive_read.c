@@ -43,7 +43,6 @@ void handle_query(char *argv[], char **env, char *curr)
 		argv[i] = _charfinder(argv[i], '/') != 1 &&
 			_strlen(argv[i]) > 0 && _charfinder(argv[i], '-')
 			!= 1 ? _strcat(new, argv[i]) : argv[i];
-		printf("%s\n", argv[i]);
 		i++;
 	}
 
