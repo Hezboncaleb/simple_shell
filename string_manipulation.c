@@ -5,19 +5,23 @@
  * @arr: array to store the tokens
  * @buffer: holds the input
  * @num: integer
+ * @delimiter: delimiter
  * Return: void
  */
 
-void _strtoarr(char *arr[], char *buffer, int num)
+void _strtoarr(char *arr[], char *buffer, int num, char *delimiter)
 {
 	char *token;
 
-	token = _strtok(buffer, " ");
+	token = _strtok(buffer, delimiter);
 	while (token != NULL)
 	{
-		arr[num] = token;
-		token = _strtok(NULL, " ");
-		num++;
+		if (_strlen(token) > 0)
+		{
+			arr[num] = token;
+			num++;
+		}
+		token = _strtok(NULL, delimiter);
 	}
 	arr[num] = NULL;
 }
@@ -76,6 +80,7 @@ int _strtoint(char *str)
 	int i, j = 1;
 
 	i = len;
+
 	while (i >= 0)
 	{
 		res += (str[i] - '0') * j;
@@ -100,7 +105,7 @@ char *_strtok(char *buffer, char *delimiter)
 
 	if (buffer == NULL)
 	{
-		if (end == NULL)
+		if (end == NULL || *end == '\0')
 			return (NULL);
 		start = end;
 	}

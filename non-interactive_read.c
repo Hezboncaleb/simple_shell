@@ -36,9 +36,17 @@ size_t _read(char **buffer, size_t *n)
 void handle_query(char *argv[], char **env, char *curr)
 {
 	char new[MAX_INPUT_LENGTH] = "/bin/";
+	int i = 0;
 
-	argv[0] = _charfinder(argv[0], '/') != 1 &&
-		_strlen(argv[0]) > 0 ? _strcat(new, argv[0]) : argv[0];
+	while (argv[i])
+	{
+		argv[i] = _charfinder(argv[i], '/') != 1 &&
+			_strlen(argv[i]) > 0 && _charfinder(argv[i], '-')
+			!= 1 ? _strcat(new, argv[i]) : argv[i];
+		printf("%s\n", argv[i]);
+		i++;
+	}
+
 	if (access(argv[0], X_OK) == 0)
 		_fork(curr, argv, env);
 	else

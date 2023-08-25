@@ -24,7 +24,7 @@ int main(int argc, char *argv[], char **env)
 				perror(curr), free(lineptr);
 				exit(EXIT_FAILURE);
 			}
-			argc = 0, _strtoarr(argv, lineptr, argc);
+			argc = 0, _strtoarr(argv, lineptr, argc, " ");
 			if (handle_exceptional_inputs(curr, argv, lineptr) == 1)
 				continue;
 			handle_query(argv, env, curr);
@@ -38,7 +38,7 @@ int main(int argc, char *argv[], char **env)
 			perror(curr), free(lineptr);
 			exit(EXIT_FAILURE);
 		}
-		argc = 0, _strtoarr(argv, lineptr, argc);
+		argc = 0, _strtoarr(argv, lineptr, argc, " ");
 		if (handle_exceptional_inputs(curr, argv, lineptr) == 1)
 		{
 			free(lineptr), exit(EXIT_SUCCESS);

@@ -9,16 +9,18 @@
 #include <sys/wait.h>
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARGS 64
+char *handle_keywords(char *lineptr, char *keyword);
 void handle_interactive(int argc, char *argv[], char **env);
+char *_strpbrk(char *s, char *accept);
 void handle_query(char *argv[], char **env, char *curr);
 int _fileno(FILE *stream);
 size_t _getline(char **buffer, size_t *n, FILE *stream);
 size_t _read(char **buffer, size_t *n);
 int prompt(char *outputtxt, char **buffer, size_t *n);
 char *_strtok(char *buffer, char *delimiter);
-void _strtoarr(char *arr[], char *buffer, int num);
+void _strtoarr(char *arr[], char *buffer, int num, char *delimiter);
 void handle_env(void);
-void handle_exit(char *arr[], char *lineptr);
+void handle_exit(char *arr[], char *lineptr, char *curr);
 void handle_cd(char *curr, char *arr[]);
 int _strlen(char *s);
 int _strtoint(char *str);

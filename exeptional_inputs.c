@@ -18,13 +18,17 @@ int handle_exceptional_inputs(char *curr,
 	}
 	else if (_strcmp(arr[0], "exit") == 0)
 	{
-		handle_exit(arr, lineptr);
+		handle_exit(arr, lineptr, curr);
 		return (1);
 	}
 	else if (_strcmp(arr[0], "cd") == 0)
 	{
 		handle_cd(curr, arr);
 		return (1);
+	}
+	else if (arr[0] == NULL)
+	{
+		_exit(EXIT_SUCCESS);
 	}
 	return (0);
 }
@@ -63,4 +67,16 @@ void handle_cd(char *curr, char *arr[])
 			perror(curr);
 		}
 	}
+}
+/**
+ * handle_keywords - handles keywords such as &&, ||
+ * @lineptr: input storage
+ * @keyword: keyword
+ * Return: char pointer
+ */
+
+char *handle_keywords(char *lineptr, char *keyword)
+{
+	return (_strtok(lineptr, keyword));
+
 }
