@@ -1,49 +1,45 @@
 #include "main.h"
 
 /**
- * main - Handles simple shell
- * @argc: number of arguments
- * @argv: command line arguments
- * @env: double pointer to environmental variables
- * Return: 0(success)
+ * main - entry point
+ * @ac: arg count
+ * @av: arg vector
+ *
+ * Return: 0 on success, 1 on error
  */
-
-int main(int argc, char *argv[], char **env)
+int main(int ac, char **av)
 {
-	char *txt = "$ ", *lineptr = NULL, *curr = argv[0];
-	size_t n = MAX_INPUT_LENGTH;
-	int bytes_read;
+	info_t info[] = { INFO_INIT };
+	int fd = 2;
 
-	if (isatty(STDIN_FILENO))
+	asm ("mov %1, %0\n\t"
+			"add $3, %0"
+			: "=r" (fd)
+			: "r" (fd));
+
+	if (ac == 2)
 	{
-		while (1)
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
 		{
-			bytes_read = prompt(txt, &lineptr, &n);
-			if (bytes_read == -1)
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
 			{
-				perror(curr), free(lineptr);
-				exit(EXIT_FAILURE);
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
+				exit(127);
 			}
-			argc = 0, _strtoarr(argv, lineptr, argc, " ");
-			if (handle_exceptional_inputs(curr, argv, lineptr) == 1)
-				continue;
-			handle_query(argv, env, curr);
+			return (EXIT_FAILURE);
 		}
+		info->readfd = fd;
 	}
-	else
-	{
-		bytes_read = _read(&lineptr, &n);
-		if (bytes_read == -1)
-		{
-			perror(curr), free(lineptr);
-			exit(EXIT_FAILURE);
-		}
-		argc = 0, _strtoarr(argv, lineptr, argc, " ");
-		if (handle_exceptional_inputs(curr, argv, lineptr) == 1)
-		{
-			free(lineptr), exit(EXIT_SUCCESS);
-		}
-		handle_query(argv, env, curr), free(lineptr);
-	}
-	return (0);
+	populate_env_list(info);
+	read_history(info);
+	hsh(info, av);
+	return (EXIT_SUCCESS);
 }
+

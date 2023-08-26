@@ -1,34 +1,75 @@
 #include "main.h"
 
 /**
- * handle_exit - function that handles theexit command
- * @arr: array containing status
- * @lineptr: address to be freed before exit
- * @curr: current executable
- * Return: nothing
+ **_strncpy - copies a string
+ *@dest: the destination string to be copied to
+ *@src: the source string
+ *@n: the amount of characters to be copied
+ *Return: the concatenated string
  */
-
-void handle_exit(char *arr[], char *lineptr, char *curr)
+char *_strncpy(char *dest, char *src, int n)
 {
-	int status, i;
+	int i, j;
+	char *s = dest;
 
-	if (arr[1] != NULL)
+	i = 0;
+	while (src[i] != '\0' && i < n - 1)
 	{
-		for (i = 0; arr[1][i] != '\0'; i++)
+		dest[i] = src[i];
+		i++;
+	}
+	if (i < n)
+	{
+		j = i;
+		while (j < n)
 		{
-			if ((arr[1][i] < 48) || (arr[1][i] > 57))
-			{
-				dprintf(2, "%s 1: exit: Illegal number: %s\n", curr, arr[1]);
-				exit(2);
-			}
+			dest[j] = '\0';
+			j++;
 		}
-		status = _strtoint(arr[1]);
-		free(lineptr);
-		_exit(status);
 	}
-	else
-	{
-		free(lineptr);
-		_exit(EXIT_SUCCESS);
-	}
+	return (s);
 }
+
+/**
+ **_strncat - concatenates two strings
+ *@dest: the first string
+ *@src: the second string
+ *@n: the amount of bytes to be maximally used
+ *Return: the concatenated string
+ */
+char *_strncat(char *dest, char *src, int n)
+{
+	int i, j;
+	char *s = dest;
+
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0' && j < n)
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	if (j < n)
+		dest[i] = '\0';
+	return (s);
+}
+
+/**
+ **_strchr - locates a character in a string
+ *@s: the string to be parsed
+ *@c: the character to look for
+ *Return: (s) a pointer to the memory area s
+ */
+char *_strchr(char *s, char c)
+{
+	do {
+		if (*s == c)
+			return (s);
+	} while (*s++ != '\0');
+
+	return (NULL);
+}
+
